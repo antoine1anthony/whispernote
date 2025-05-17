@@ -44,8 +44,8 @@ def process_audio_file():
                 # transcribe each segment of audio separately
                 transcript = transcribe_audio(segment_file_path)
 
-                # summarize the transcription
-                summary = summarize_transcription(transcript)
+                # summarize the transcription using the raw text
+                summary = summarize_transcription(transcript["raw"])
 
                 # write notes from the summary
                 notes = write_notes(summary)

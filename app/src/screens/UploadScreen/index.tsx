@@ -46,7 +46,8 @@ console.log('WHISPER_API_ENDPOINT:', WHISPER_API_ENDPOINT);
  * @returns {JSX.Element} A React Native component.
  */
 const UploadScreen = () => {
-  const [transcription, setTranscription] = useState<string | null>(transcript);
+  // initialize the transcription state without a default value
+  const [transcription, setTranscription] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [allResults, setAllResults] = useState<any[]>([]);
