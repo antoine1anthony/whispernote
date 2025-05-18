@@ -55,7 +55,12 @@ def chatgpt3(userinput, temperature=0.6, frequency_penalty=0, presence_penalty=0
 
 
 def transcribe_audio(audio_file_path):
-    # This function will send the audio file to Whisper ASR API and return the transcription
+    """Transcribe the given audio file using OpenAI Whisper ASR.
+
+    Returns a dictionary with a single key "raw" containing the raw
+    transcription text so that callers can safely access
+    ``transcript["raw"]``.
+    """
     with open(audio_file_path, 'rb') as audio_file:
         transcription = openai.Audio.transcribe("whisper-1", audio_file)
     return {'raw': transcription.text}

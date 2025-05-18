@@ -41,7 +41,9 @@ def process_audio_file():
                 segment_file_path = os.path.join(os.getcwd(), f"segment_{i}.mp3")
                 segment.export(segment_file_path, format='mp3')
 
-                # transcribe each segment of audio separately
+                # transcribe each segment of audio separately. transcribe_audio
+                # is expected to return a dictionary that always includes a
+                # "raw" key containing the transcription text.
                 transcript = transcribe_audio(segment_file_path)
 
                 # summarize the transcription using the raw text
