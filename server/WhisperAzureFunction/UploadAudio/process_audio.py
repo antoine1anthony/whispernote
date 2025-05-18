@@ -1,9 +1,14 @@
 # process_audio.py
-import openai
+from openai import OpenAI
+
+client = OpenAI()
 
 def transcribe_audio(audio_file):
     # This function will send the audio file to Whisper ASR API and return the transcription
-    transcription = openai.Audio.transcribe("whisper-1", audio_file)
+    transcription = client.audio.transcriptions.create(
+        model="whisper-1",
+        file=audio_file
+    )
     return transcription
 
 def process_audio(file_path):
