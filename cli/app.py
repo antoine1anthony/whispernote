@@ -3,7 +3,6 @@
 # CLI imports
 import os
 import moviepy.editor as mp
-import openai
 import time
 import logging
 from dotenv import load_dotenv
@@ -29,7 +28,6 @@ def extract_audio_from_video(video_path: str, audio_path: str) -> None:
 def transcribe_directory(directory):
     print(" Beginning transcribe_directory")
     load_dotenv()
-    openai.api_key = os.getenv('OPENAI_API_KEY')
 
     video_extensions = ['.mov', '.mp4', '.avi', '.wmv']
 

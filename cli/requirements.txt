@@ -1,7 +1,7 @@
 # requirements.txt
 
 werkzeug
-openai
+openai>=1.0.0
 python-dotenv
 tqdm
 tiktoken

@@ -5,12 +5,10 @@ import os
 import azure.functions as func
 from .process_audio import process_audio
 from werkzeug.utils import secure_filename
-import openai
 from dotenv import load_dotenv
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     load_dotenv()
-    openai.api_key = os.getenv('OPENAI_API_KEY')
 
     logging.info('Python HTTP trigger function processed a request.')
 

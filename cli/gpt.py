@@ -1,6 +1,6 @@
 # gpt.py
 
-import openai
+from openai import OpenAI
 import logging
 from typing import List, Dict
 
@@ -25,6 +25,7 @@ class TranscriptionFormatter:
         self.model = model
         self.conversation: List[Dict[str, str]] = []  # To store the conversation history
         self.system_prompt = system_prompt
+        self.client = OpenAI()
 
     def format_transcription(self, transcription: str, **kwargs) -> str:
         """
@@ -43,14 +44,14 @@ class TranscriptionFormatter:
         messages.append({"role": "user", "content": prompt})
         
         try:
-            response = openai.ChatCompletion.create(
-              model=self.model,
-              temperature=params['temperature'],
-              frequency_penalty=params['frequency_penalty'],
-              presence_penalty=params['presence_penalty'],
-              messages=messages
+            response = self.client.chat.completions.create(
+                model=self.model,
+                temperature=params['temperature'],
+                frequency_penalty=params['frequency_penalty'],
+                presence_penalty=params['presence_penalty'],
+                messages=messages
             )
-            formatted_transcription = response['choices'][0]['message']['content']
+            formatted_transcription = response.choices[0].message.content
             print("Successfully formatted the transcription.")
             return formatted_transcription
 

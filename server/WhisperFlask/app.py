@@ -3,7 +3,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import logging
 import os
-import openai
 from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 import logging
@@ -16,7 +15,6 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}}) # Initialize CORS
 load_dotenv()
-openai.api_key = os.getenv('OPENAI_API_KEY')
 
 @app.route('/api/uploadaudio', methods=['POST'])
 def process_audio_file():

@@ -1,7 +1,7 @@
 # process_audio.py
 
 import os
-import openai
+from openai import OpenAI
 import tiktoken
 import logging
 
@@ -9,6 +9,8 @@ from pydub import AudioSegment
 from pydub.silence import split_on_silence
 from transcript_formatter_gpt import ROLE
 from gpt import TranscriptionFormatter
+
+client = OpenAI()
 
 def format_transcription(transcription):
     """
@@ -71,7 +73,10 @@ def transcribe_audio(audio_file_path):
             chunk.export(chunk_path, format="mp3")
 
             with open(chunk_path, 'rb') as audio_file:
-                chunk_transcription = openai.Audio.transcribe("whisper-1", audio_file)
+                chunk_transcription = client.audio.transcriptions.create(
+                    model="whisper-1",
+                    file=audio_file
+                )
                 transcription_total += chunk_transcription.text
 
             # Cleanup temporary chunk
